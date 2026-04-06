@@ -4,45 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vaad — The Modern Legal Dashboard</title>
-    <meta name="description" content="Track Indian court cases instantly and manage your advocate fee ledger securely.">
-    <meta name="theme-color" content="#8b5cf6">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="Track Indian court cases instantly, manage your fee ledger, and draft legal documents with Vaad AI.">
+    <meta name="theme-color" content="#1a3a8a">
+    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #8b5cf6;
-            --primary-hover: #7c3aed;
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.5);
+            /* Dharma Color Palette */
+            --primary: #9c6b1e; /* Warm Gold */
+            --primary-hover: #b88222;
+            --bg: #1a3a8a; /* Deep Navy Blue */
+            --surface: #11255c; /* Darker Navy */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #2a4b9d;
+            --glass-bg: rgba(17, 37, 92, 0.7);
+            --glass-border: rgba(156, 107, 30, 0.3);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         
         body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
         
+        h1, h2, h3, .logo { font-family: 'DM Serif Display', serif; font-weight: normal; }
+
         /* Background Gradient blobs */
-        .bg-blob { position: fixed; border-radius: 50%; filter: blur(80px); z-index: -1; opacity: 0.4; }
-        .blob-1 { top: -100px; left: -100px; width: 400px; height: 400px; background: #c4b5fd; }
-        .blob-2 { bottom: -100px; right: -100px; width: 500px; height: 500px; background: #ddd6fe; }
+        .bg-blob { position: fixed; border-radius: 50%; filter: blur(100px); z-index: -1; opacity: 0.5; }
+        .blob-1 { top: -100px; left: -100px; width: 400px; height: 400px; background: #264baf; }
+        .blob-2 { bottom: -100px; right: -100px; width: 500px; height: 500px; background: #0c1b47; }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
         /* Navigation */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; }
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
-        .nav-btn { background: var(--surface); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
-        .nav-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .logo { font-size: 2rem; color: var(--primary); text-decoration: none; letter-spacing: 1px; }
+        .nav-btn { background: var(--primary); border: 1px solid var(--primary); padding: 10px 20px; border-radius: 8px; text-decoration: none; color: #fff; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
+        .nav-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
 
         /* Hero Section */
         .hero { text-align: center; padding: 80px 0 60px; }
-        .hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -1px; line-height: 1.1; margin-bottom: 24px; color: #0f172a; }
+        .hero-eyebrow { color: var(--primary); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 16px; }
+        .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 24px; color: var(--text-main); }
         .hero h1 span { color: var(--primary); }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 40px; }
 
         /* Action Buttons */
         .action-buttons { display: flex; flex-direction: column; gap: 16px; align-items: center; max-width: 400px; margin: 0 auto; }
@@ -50,22 +55,33 @@
         .btn { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 16px; border-radius: 12px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
         .btn:hover { transform: translateY(-2px); }
         
-        .btn-play { background: #000; color: #fff; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2); }
-        .btn-web { background: var(--primary); color: #fff; box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4); }
+        .btn-play { background: #000; color: #fff; border: 1px solid #333; }
+        .btn-web { background: var(--primary); color: #fff; box-shadow: 0 10px 25px -5px rgba(156, 107, 30, 0.4); }
         .btn-apk { background: var(--surface); color: var(--text-main); border: 1px solid var(--border); }
-        .btn-ios { background: #f1f5f9; color: #94a3b8; cursor: not-allowed; border: 1px dashed #cbd5e1; }
 
         .store-icon { font-size: 1.5rem; }
 
         /* Features Grid */
-        .features { padding: 80px 0; }
-        .section-title { text-align: center; font-size: 2rem; font-weight: 800; margin-bottom: 48px; }
+        .features, .pricing { padding: 80px 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 48px; color: var(--text-main); }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
         
-        .card { background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); padding: 32px; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        .card-icon { font-size: 2.5rem; margin-bottom: 16px; display: inline-block; background: #f3f4f6; padding: 16px; border-radius: 16px; }
-        .card h3 { font-size: 1.25rem; margin-bottom: 12px; font-weight: 700; }
+        .card { background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); padding: 32px; border-radius: 20px; }
+        .card-icon { font-size: 2.5rem; margin-bottom: 16px; display: inline-block; background: var(--surface); padding: 16px; border-radius: 16px; border: 1px solid var(--border); }
+        .card h3 { font-size: 1.5rem; margin-bottom: 12px; color: var(--primary); }
         .card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* Pricing Section */
+        .pricing-card { background: var(--surface); border: 1px solid var(--border); padding: 32px; border-radius: 20px; text-align: left; position: relative; }
+        .pricing-card.highlight { border-color: var(--primary); box-shadow: 0 0 30px rgba(156, 107, 30, 0.15); }
+        .pricing-name { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 8px; color: var(--text-main); }
+        .pricing-price { font-size: 2.5rem; font-weight: 800; margin-bottom: 24px; color: var(--primary); }
+        .pricing-price span { font-size: 1rem; font-weight: 500; color: var(--text-muted); }
+        .feature-list { list-style: none; margin-bottom: 32px; }
+        .feature-list li { margin-bottom: 12px; font-size: 0.95rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+        .feature-list li::before { content: '✦'; color: var(--primary); font-size: 0.8rem; }
+        .feature-list li.disabled { opacity: 0.5; text-decoration: line-through; }
+        .feature-list li.disabled::before { content: '✕'; color: #ef4444; }
 
         /* FAQ Section */
         .faq-section { padding: 60px 0 100px; max-width: 800px; margin: 0 auto; }
@@ -78,11 +94,13 @@
 
         /* Footer */
         footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; }
+        .compliance-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); padding: 8px 16px; border-radius: 20px; margin-top: 16px; color: var(--text-main); font-size: 0.85rem; }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.8rem; }
             .hero p { font-size: 1.1rem; }
             .action-buttons { width: 100%; padding: 0 16px; }
+            .section-title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -93,15 +111,21 @@
 
     <div class="container">
         <nav>
-            <a href="https://vaad.pages.dev" class="logo">Vaad</a>
-            <a href="https://vaad.pages.dev" class="nav-btn">Open Web App</a>
+            <a href="https://vaad.pages.dev" class="logo">Vaad.</a>
+            <a href="https://vaad.pages.dev" class="nav-btn">Launch App</a>
         </nav>
 
         <section class="hero">
-            <h1>The Modern Workspace for <span>Advocates</span>.</h1>
-            <p>Track eCourts cases instantly, manage your fee ledger securely, and let AI translate complex legal orders. Built for the Indian legal system.</p>
+            <div class="hero-eyebrow">✦ Vaad 2.1 — The Dharma Update</div>
+            <h1>Truth. Clarity. <span>Speed.</span></h1>
+            <p>Track eCourts cases instantly, manage your fee ledger, and draft legal documents using Vaad AI. The ultimate workspace built for modern Indian advocates.</p>
             
             <div class="action-buttons">
+                <a href="https://vaad.pages.dev" class="btn btn-web">
+                    <span class="store-icon">⚖️</span>
+                    <span>Use Web App Instantly</span>
+                </a>
+
                 <a href="#" class="btn btn-play">
                     <span class="store-icon">▶️</span>
                     <div style="text-align: left; line-height: 1.2;">
@@ -110,21 +134,10 @@
                     </div>
                 </a>
 
-                <a href="https://vaad.pages.dev" class="btn btn-web">
-                    <span class="store-icon">🌐</span>
-                    <span>Use Web App Instantly</span>
-                </a>
-
                 <a href="downloads/Vaad.apk" class="btn btn-apk" download>
-    <span class="store-icon">📦</span>
-    <span>Download Direct APK</span>
-</a>
-
-
-                <div class="btn btn-ios">
-                    <span class="store-icon">🍎</span>
-                    <span>App Store (Coming Soon)</span>
-                </div>
+                    <span class="store-icon">📦</span>
+                    <span>Download Direct APK</span>
+                </a>
             </div>
         </section>
 
@@ -132,25 +145,82 @@
             <h2 class="section-title">Everything you need, in one pocket.</h2>
             <div class="grid">
                 <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>Ask Vaad AI</h3>
+                    <p>A built-in Legal Assistant trained on the new BNS, BNSS, and BSA. Get instant legal answers or draft professional RTIs and Notices in Hindi or English.</p>
+                </div>
+                <div class="card">
                     <div class="card-icon">⚡</div>
                     <h3>Instant Case Tracking</h3>
-                    <p>Search millions of Indian court records instantly using CNR, Advocate Name, Litigant Name, or Judge Name. Backed by official eCourts data.</p>
+                    <p>Search millions of Indian court records instantly using CNR, Advocate Name, Litigant Name, or Judge Name. Powered by official eCourts data.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">💼</div>
                     <h3>Practice Dashboard</h3>
-                    <p>Never lose track of pending payments. Set total expected fees, log per-hearing installments, and view outstanding balances at a glance.</p>
+                    <p>Never lose track of pending payments. Set total expected fees, log per-hearing installments, and view outstanding client balances at a glance.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon">✨</div>
-                    <h3>AI Legal Assistant</h3>
-                    <p>Encounter complex legal jargon or lengthy orders? Use the built-in AI assistant to translate complex legal text into plain English instantly.</p>
+                    <div class="card-icon">📄</div>
+                    <h3>AI Order Summaries</h3>
+                    <p>Stop reading 50-page judgments. Vaad's AI engine extracts the Date, Judge Name, Key Findings, and Outcome from official court PDFs instantly.</p>
                 </div>
-                <div class="card">
-                    <div class="card-icon">🔒</div>
-                    <h3>100% DPDP Compliant</h3>
-                    <p>Your ledger data is highly sensitive. Vaad strictly complies with India's DPDP Act, storing data on localized Mumbai servers with a 1-tap delete option.</p>
+            </div>
+        </section>
+
+        <section class="pricing" id="pricing">
+            <h2 class="section-title">Transparent, Advocate-First Pricing.</h2>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                
+                <div class="pricing-card">
+                    <div class="pricing-name">Free Tier</div>
+                    <div class="pricing-price">₹0<span> / forever</span></div>
+                    <ul class="feature-list">
+                        <li>Practice Ledger Dashboard</li>
+                        <li><strong>5 Ask Vaad AI Chats / day</strong></li>
+                        <li>1 Trial eCourts Search</li>
+                        <li class="disabled">No Official PDF Downloads</li>
+                        <li class="disabled">No AI Order Summaries</li>
+                    </ul>
+                    <a href="https://vaad.pages.dev" class="btn btn-apk" style="width: 100%;">Start Free</a>
                 </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-name" style="color: #cbd5e1;">Pro Plan</div>
+                    <div class="pricing-price">₹99<span> / month</span></div>
+                    <ul class="feature-list">
+                        <li><strong>20</strong> eCourts Searches + 5 PDFs</li>
+                        <li><strong>50 Ask Vaad AI Chats / day</strong></li>
+                        <li><strong>3</strong> AI Order Summaries</li>
+                        <li>Unlock Cause List Search</li>
+                    </ul>
+                    <a href="https://vaad.pages.dev" class="btn btn-apk" style="width: 100%;">Upgrade</a>
+                </div>
+
+                <div class="pricing-card highlight">
+                    <div style="position: absolute; top: -12px; right: 24px; background: var(--primary); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; text-transform: uppercase;">Most Popular</div>
+                    <div class="pricing-name" style="color: var(--primary);">Pro Max</div>
+                    <div class="pricing-price">₹199<span> / month</span></div>
+                    <ul class="feature-list">
+                        <li><strong>50</strong> eCourts Searches + 10 PDFs</li>
+                        <li><strong>100 Ask Vaad AI Chats / day</strong></li>
+                        <li><strong>8</strong> AI Order Summaries</li>
+                        <li>Unlock Bulk CNR Refresh Engine</li>
+                    </ul>
+                    <a href="https://vaad.pages.dev" class="btn btn-web" style="width: 100%;">Get Pro Max</a>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-name" style="color: #f8fafc;">Supreme</div>
+                    <div class="pricing-price">₹399<span> / month</span></div>
+                    <ul class="feature-list">
+                        <li><strong>100</strong> eCourts Searches + 20 PDFs</li>
+                        <li><strong>200 Ask Vaad AI Chats / day</strong></li>
+                        <li><strong>15</strong> AI Order Summaries</li>
+                        <li>Instant Access to All Features</li>
+                    </ul>
+                    <a href="https://vaad.pages.dev" class="btn btn-apk" style="width: 100%;">Get Supreme</a>
+                </div>
+
             </div>
         </section>
 
@@ -158,13 +228,13 @@
             <h2 class="section-title">Frequently Asked Questions</h2>
             
             <details>
-                <summary>Is Vaad free to use?</summary>
-                <div class="faq-content">Yes. Basic search and dashboard functions are available for free. For heavy usage, bulk CNR refreshing, and daily cause lists, we offer affordable Pro and Supreme tiers starting at just ₹99/month.</div>
+                <summary>Is my financial data safe?</summary>
+                <div class="faq-content">Absolutely. We use Google Firebase with robust security rules. Your ledger is strictly private, synced only to your account, and hosted securely on cloud servers.</div>
             </details>
 
             <details>
-                <summary>Is my financial data safe?</summary>
-                <div class="faq-content">Absolutely. We use Google Firebase with robust security rules. Your ledger is strictly private, synced only to your account, and hosted securely on servers located in Mumbai, India.</div>
+                <summary>What languages does Vaad AI support?</summary>
+                <div class="faq-content">Vaad AI understands and replies in the language you use. You can ask questions in English, pure Hindi, or Hinglish (Hindi written in English letters). It will adapt to you perfectly.</div>
             </details>
 
             <details>
@@ -180,9 +250,8 @@
 
         <footer>
             <p>© 2026 Raghav Communication. All rights reserved.</p>
-            <div style="margin-top: 12px; display: flex; justify-content: center; gap: 16px;">
-                <a href="privacy.html" style="color: var(--primary); text-decoration: none;">Privacy Policy</a>
-                <a href="terms.html" style="color: var(--primary); text-decoration: none;">Terms of Service</a>
+            <div class="compliance-badge">
+                <span style="color: #10b981;">✔</span> 100% Compliant with India's Digital Personal Data Protection (DPDP) Act.
             </div>
         </footer>
     </div>
